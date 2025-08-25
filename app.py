@@ -27,3 +27,12 @@ def chat(inp: ChatIn):
     )
     return {"reply": reply.choices[0].message.content}
   
+@app.post("/chat")
+def chat(inp: ChatIn):
+    reply = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "user", "content": inp.message}
+        ]
+    )
+    return {"reply": reply.choices[0].message.content}
